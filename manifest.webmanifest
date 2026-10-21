@@ -1,0 +1,16 @@
+{
+  "name": "Hisaab - Money Calculators",
+  "short_name": "Hisaab",
+  "description": "Income tax, salary, GST, FD, PPF, SIP, EMI and more, in English and Hindi.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F2F6F5",
+  "theme_color": "#0E4D45",
+  "lang": "en-IN",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loan Prepayment Calculator: Interest Saved - Hisaab</title>
+<meta name="description" content="See how much interest a lump-sum or monthly part payment saves on your home loan, and whether to cut the tenure or the EMI.">
+<link rel="canonical" href="https://priya4042.github.io/hisaab/loan-prepayment-calculator.html">
+<meta property="og:title" content="Loan Prepayment Calculator: Interest Saved - Hisaab">
+<meta property="og:description" content="See how much interest a lump-sum or monthly part payment saves on your home loan, and whether to cut the tenure or the EMI.">
+<meta property="og:image" content="https://priya4042.github.io/hisaab/assets/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E4D45">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/hisaab.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Loan prepayment calculator", "url": "https://priya4042.github.io/hisaab/loan-prepayment-calculator.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Prepay the loan or invest the money?", "acceptedAnswer": {"@type": "Answer", "text": "Prepaying gives a sure return equal to the loan rate. Investing may earn more but is not certain. Many people do some of both."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main"><span data-only="en">Skip to content</span><span data-only="hi">सामग्री पर जाएँ</span></a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="2" width="26" height="30" rx="4" fill="#0E4D45"/><path d="M10 2v30M12.5 2v30" stroke="#F07B7B" stroke-width="1.4"/><path d="M15 11h10M15 17h10M15 23h7" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".85"/><circle cx="26" cy="25" r="6" fill="#F29F05" stroke="#fff" stroke-width="1.8"/></svg>Hisaab</a>
+  <nav class="nav" id="nav" aria-label="Main"><a href="./"><span data-only="en">Calculators</span><span data-only="hi">सभी कैलकुलेटर</span></a><a href="income-tax-calculator.html"><span data-only="en">Income tax</span><span data-only="hi">इनकम टैक्स</span></a><a href="salary-calculator.html"><span data-only="en">Salary</span><span data-only="hi">सैलरी</span></a><a href="emi-calculator.html"><span data-only="en">EMI</span><span data-only="hi">EMI</span></a><a href="gst-calculator.html"><span data-only="en">GST</span><span data-only="hi">GST</span></a></nav>
+  <button class="tbtn nav-tog" id="nav-btn" aria-controls="nav" aria-expanded="false" aria-label="Menu">&#9776;</button>
+  <button class="tbtn" id="lang-btn" type="button">हिं</button>
+  <button class="tbtn" id="theme-btn" type="button" aria-label="Dark or light theme">&#9681;</button>
+</div></header>
+
+<main id="main" class="wrap">
+  <section class="intro">
+    <div class="crumbs"><a href="./">Hisaab</a> / <span data-only="en">Loan prepayment</span><span data-only="hi">लोन प्रीपेमेंट</span></div>
+    <h1><span data-only="en">Loan prepayment calculator</span><span data-only="hi">लोन प्रीपेमेंट कैलकुलेटर</span></h1>
+    <p class="lede"><span data-only="en">A part payment early in the loan saves far more interest than the same amount later.</span><span data-only="hi">लोन की शुरुआत में किया गया पार्ट पेमेंट बाद के मुकाबले कहीं ज़्यादा ब्याज बचाता है।</span></p>
+    
+  </section>
+  <div class="calc">
+    <form class="form" id="calc-form" novalidate><fieldset><legend><span data-only="en">Your loan</span><span data-only="hi">आपका लोन</span></legend><div class="fgrid"><div class="fld"><label for="f-amount"><span data-only="en">Loan amount</span><span data-only="hi">लोन रकम</span></label><div class="inp"><span class="pre">₹</span><input type="number" id="f-amount" name="amount" value="3000000" inputmode="decimal" step="any" min="0" data-money></div><small data-words aria-hidden="true"></small></div><div class="fld"><label for="f-rate"><span data-only="en">Interest rate</span><span data-only="hi">ब्याज दर</span></label><div class="inp"><input type="number" id="f-rate" name="rate" value="8.5" inputmode="decimal" step="0.01" min="0" max="30"><span class="suf">%</span></div></div><div class="fld"><label for="f-years"><span data-only="en">Tenure in years</span><span data-only="hi">अवधि (साल)</span></label><div class="inp"><input type="number" id="f-years" name="years" value="20" inputmode="decimal" step="1" min="1" max="30"></div></div></div></fieldset><fieldset><legend><span data-only="en">Prepayment</span><span data-only="hi">प्रीपेमेंट</span></legend><div class="fgrid"><div class="fld"><label for="f-lump"><span data-only="en">One-time part payment</span><span data-only="hi">एक बार का पार्ट पेमेंट</span></label><div class="inp"><span class="pre">₹</span><input type="number" id="f-lump" name="lump" value="300000" inputmode="decimal" step="any" min="0" data-money></div><small data-words aria-hidden="true"></small></div><div class="fld"><label for="f-at"><span data-only="en">Paid after how many EMIs</span><span data-only="hi">कितनी EMI के बाद</span></label><div class="inp"><input type="number" id="f-at" name="at" value="24" inputmode="decimal" step="1" min="1" max="360"></div></div><div class="fld"><label for="f-extra"><span data-only="en">Extra every month</span><span data-only="hi">हर महीने अतिरिक्त</span></label><div class="inp"><span class="pre">₹</span><input type="number" id="f-extra" name="extra" value="0" inputmode="decimal" step="any" min="0" data-money></div><small data-words aria-hidden="true"></small></div><div class="fld" role="radiogroup" aria-labelledby="f-mode-l"><span class="lbl" id="f-mode-l"><span data-only="en">After prepaying, reduce</span><span data-only="hi">प्रीपेमेंट के बाद घटाएँ</span></span><div class="seg"><label><input type="radio" name="mode" value="tenure" checked><span><span data-only="en">Tenure</span><span data-only="hi">अवधि</span></span></label><label><input type="radio" name="mode" value="emi"><span><span data-only="en">EMI</span><span data-only="hi">EMI</span></span></label></div></div></div></fieldset><p class="hint"><span data-only="en">The result updates as you type.</span><span data-only="hi">टाइप करते ही नतीजा बदलता है।</span></p></form>
+    <section class="ledger" id="ledger" aria-live="polite" aria-label="Result"></section>
+  </div>
+  <details class="yt" id="yt" hidden><summary></summary><div class="tw"></div></details>
+  <section class="sec">
+    <h2><span data-only="en">How it works</span><span data-only="hi">यह कैसे काम करता है</span></h2><p><span data-only="en">Banks cannot charge a prepayment penalty on floating-rate home loans taken by individuals. Keeping the EMI and cutting the tenure saves the most interest.</span><span data-only="hi">व्यक्तियों के फ़्लोटिंग रेट होम लोन पर बैंक प्रीपेमेंट जुर्माना नहीं ले सकते। EMI वही रखकर अवधि घटाने से सबसे ज़्यादा ब्याज बचता है।</span></p>
+    
+    <h2><span data-only="en">Questions</span><span data-only="hi">सवाल</span></h2><div class="faq"><details><summary><span data-only="en">Prepay the loan or invest the money?</span><span data-only="hi">लोन चुकाएँ या पैसा निवेश करें?</span></summary><p><span data-only="en">Prepaying gives a sure return equal to the loan rate. Investing may earn more but is not certain. Many people do some of both.</span><span data-only="hi">प्रीपेमेंट से लोन की दर जितना पक्का फ़ायदा होता है। निवेश से ज़्यादा मिल सकता है पर पक्का नहीं। कई लोग दोनों थोड़ा-थोड़ा करते हैं।</span></p></details></div>
+    <h2><span data-only="en">Related calculators</span><span data-only="hi">जुड़े कैलकुलेटर</span></h2><div class="related"><a href="emi-calculator.html"><span data-only="en">Loan EMI</span><span data-only="hi">लोन EMI</span></a><a href="sip-calculator.html"><span data-only="en">SIP with step-up</span><span data-only="hi">स्टेप-अप के साथ SIP</span></a></div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap">
+  <span>&copy; <span id="year">2026</span> Hisaab. <span data-only="en">A free tool by</span><span data-only="hi">एक मुफ़्त टूल,</span> <a href="https://priya4042.github.io/">Priya Tech Labs</a>. <a href="privacy.html"><span data-only="en">Privacy</span><span data-only="hi">प्राइवेसी</span></a></span>
+  <nav aria-label="All calculators"><a href="income-tax-calculator.html"><span data-only="en">Income tax: old vs new</span><span data-only="hi">इनकम टैक्स: पुरानी बनाम नई</span></a><a href="salary-calculator.html"><span data-only="en">In-hand salary from CTC</span><span data-only="hi">CTC से हाथ में सैलरी</span></a><a href="gst-calculator.html"><span data-only="en">GST</span><span data-only="hi">GST</span></a><a href="fd-calculator.html"><span data-only="en">Fixed deposit (FD)</span><span data-only="hi">फ़िक्स्ड डिपॉज़िट (FD)</span></a><a href="rd-calculator.html"><span data-only="en">Recurring deposit (RD)</span><span data-only="hi">रेकरिंग डिपॉज़िट (RD)</span></a><a href="ppf-calculator.html"><span data-only="en">PPF</span><span data-only="hi">PPF</span></a><a href="sip-calculator.html"><span data-only="en">SIP with step-up</span><span data-only="hi">स्टेप-अप के साथ SIP</span></a><a href="emi-calculator.html"><span data-only="en">Loan EMI</span><span data-only="hi">लोन EMI</span></a><a href="loan-prepayment-calculator.html"><span data-only="en">Loan prepayment</span><span data-only="hi">लोन प्रीपेमेंट</span></a><a href="hra-calculator.html"><span data-only="en">HRA exemption</span><span data-only="hi">HRA छूट</span></a><a href="age-calculator.html"><span data-only="en">Age</span><span data-only="hi">उम्र</span></a><a href="percentage-calculator.html"><span data-only="en">Percentage</span><span data-only="hi">प्रतिशत</span></a></nav>
+  <span><span data-only="en">For planning only. Check final figures with your bank, employer or a tax professional.</span><span data-only="hi">सिर्फ़ योजना के लिए। अंतिम आँकड़े अपने बैंक, कंपनी या टैक्स सलाहकार से जाँचें।</span></span>
+</div></footer>
+<script>window.HISAAB_CALC = "prepay";</script>
+<script src="assets/calcs.js"></script>
+<script src="assets/core.js"></script>
+</body>
+</html>

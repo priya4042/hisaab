@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://priya4042.github.io/hisaab/sitemap.xml
