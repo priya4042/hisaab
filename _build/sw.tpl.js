@@ -1,5 +1,5 @@
 // Network first so updates show at once; cached copy when offline.
-var CACHE = "hisaab-v1";
+var CACHE = "hisaab-v2";
 var CORE = /*CORE*/;
 self.addEventListener("install", function (e) { e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener("activate", function (e) {

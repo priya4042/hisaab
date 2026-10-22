@@ -1,0 +1,21 @@
+{
+ "updated": "2026-10-22",
+ "note": "Default inputs and labels the Hisaab app uses. Change a rate here and bump 'updated'; the app picks it up on its next launch.",
+ "defaults": {
+  "ppf-calculator": {
+   "rate": 7.1
+  },
+  "sukanya-samriddhi-calculator": {
+   "rate": 8.2
+  },
+  "rd-calculator": {
+   "rate": 6.7
+  }
+ },
+ "asof": {
+  "ppf-calculator": [
+   "Rate for October to December 2026",
+   "अक्टूबर से दिसंबर 2026 की दर"
+  ]
+ }
+}

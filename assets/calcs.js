@@ -235,4 +235,98 @@
     var pct = v.mode === "what" || v.mode === "change";
     return { bigLabel: ["Answer", "जवाब"], big: isFinite(r) ? H.num(pct ? Math.abs(r) : r) + (pct ? "%" : "") : "-", rows: [{ k: line, kind: "note" }] };
   } };
+
+  C.split = { compute: function (v) {
+    var n = Math.max(1, Math.round(v.people)), tip = v.amount * v.tip / 100, total = v.amount + tip, exact = total / n, unit = +v.round;
+    var share = unit > 0 ? Math.ceil(exact / unit - 1e-9) * unit : exact, extra = share * n - total;
+    return {
+      bigLabel: ["Each person pays", "हर व्यक्ति देगा"], big: share, sub: n + H.t([" people", " लोग"]),
+      rows: [{ k: ["Bill", "बिल"], v: v.amount }, { k: ["Tip or service charge", "टिप या सर्विस चार्ज"], v: tip, kind: "add" }, { k: ["Total to share", "कुल बाँटना"], v: total, kind: "head" },
+        { k: ["Exact share", "सटीक हिस्सा"], v: Math.round(exact * 100) / 100 }, { k: ["Each person pays", "हर व्यक्ति देगा"], v: share, kind: "total" },
+        { k: ["Collected over the bill (from rounding)", "बिल से ज़्यादा जमा (राउंड करने से)"], v: Math.max(0, extra) },
+        { k: ["If one person paid the whole bill, everyone else gives them their share.", "अगर एक व्यक्ति ने पूरा बिल दिया है, तो बाकी सब उसे अपना हिस्सा दें।"], kind: "note" }]
+    };
+  } };
+
+  C.gold = { compute: function (v) {
+    var gold = v.metal === "gold", k = +v.purity, perG = gold ? v.rate / 10 * k / 24 : v.rate / 1000;
+    var metal = v.grams * perG, making = metal * v.making / 100, gst = (metal + making) * v.gst / 100, total = metal + making + gst;
+    return {
+      bigLabel: ["Total bill", "कुल बिल"], big: total, sub: H.inr(perG) + H.t([" per gram", " प्रति ग्राम"]) + (gold ? " (" + k + "K)" : ""),
+      rows: [{ k: gold ? [k + "K gold value", k + "K सोने का दाम"] : ["Silver value", "चाँदी का दाम"], v: metal },
+        { k: ["Making charges", "मेकिंग चार्ज"], v: making, kind: "add" }, { k: ["GST", "GST"], v: gst, kind: "add" }, { k: ["Total bill", "कुल बिल"], v: total, kind: "total" },
+        { k: ["Making charges are not paid back when you sell or exchange; only the metal value is.", "बेचने या बदलने पर मेकिंग चार्ज वापस नहीं मिलता; सिर्फ़ धातु का दाम मिलता है।"], kind: "note" }],
+      split: [{ k: ["Metal", "धातु"], v: metal, c: c2 }, { k: ["Making", "मेकिंग"], v: making, c: c1 }, { k: ["GST", "GST"], v: gst, c: c3 }]
+    };
+  } };
+
+  C.gratuity = { compute: function (v) {
+    var yrs = Math.floor(v.years), mo = Math.round(v.months), covered = v.covered === "yes";
+    var count = covered ? yrs + (mo > 6 ? 1 : 0) : yrs, g = covered ? v.salary * 15 / 26 * count : v.salary * 15 / 30 * count;
+    var free = Math.min(g, 2000000), rows = [
+      { k: ["Last monthly basic + DA", "आखिरी मासिक बेसिक + DA"], v: v.salary },
+      { k: ["Years counted", "गिने गए साल"], v: count, fmt: "num" },
+      { k: covered ? ["15 days' wages a year (salary x 15 / 26)", "हर साल 15 दिन की तनख़्वाह (सैलरी x 15 / 26)"] : ["Half a month a year (salary x 15 / 30)", "हर साल आधा महीना (सैलरी x 15 / 30)"], v: g / Math.max(1, count) },
+      { k: ["Gratuity", "ग्रेच्युटी"], v: g, kind: "total" },
+      { k: ["Tax-free (private sector, up to 20 lakh)", "टैक्स-फ़्री (प्राइवेट, 20 लाख तक)"], v: free },
+      { k: ["Taxable", "टैक्स योग्य"], v: g - free }];
+    if (yrs < 5) rows.push({ k: ["Permanent staff need 5 years of service. Fixed-term staff qualify after 1 year.", "स्थायी कर्मचारियों को 5 साल की नौकरी चाहिए। फ़िक्स्ड-टर्म कर्मचारी 1 साल बाद हकदार हैं।"], kind: "note" });
+    if (covered && mo > 6) rows.push({ k: [mo + " extra months count as a full year.", mo + " अतिरिक्त महीने पूरे साल गिने गए।"], kind: "note" });
+    return { bigLabel: ["Gratuity you get", "मिलने वाली ग्रेच्युटी"], big: g, rows: rows };
+  } };
+
+  C.nps = { compute: function (v) {
+    var years = Math.max(0, Math.round(v.retire - v.age)), i = v.rate / 1200, p = v.amount, bal = 0, inv = 0, rows = [];
+    for (var y = 1; y <= years; y++) {
+      for (var m = 0; m < 12; m++) { bal = (bal + p) * (1 + i); inv += p; }
+      rows.push([(Math.round(v.age) + y) + "", inv, bal]);
+      p = p * (1 + v.step / 100);
+    }
+    var ann = bal * v.annuity / 100, lump = bal - ann, pension = ann * v.arate / 1200;
+    return {
+      bigLabel: ["Retirement corpus", "रिटायरमेंट फ़ंड"], big: bal, sub: H.t(["Monthly pension about ", "मासिक पेंशन लगभग "]) + H.inr(pension),
+      rows: [{ k: ["Total contributed", "कुल योगदान"], v: inv }, { k: ["Growth", "बढ़त"], v: bal - inv, kind: "add" }, { k: ["Corpus at " + Math.round(v.retire), Math.round(v.retire) + " पर फ़ंड"], v: bal, kind: "head" },
+        { k: ["Lump sum you can take out", "एकमुश्त निकाल सकते हैं"], v: lump }, { k: ["Used for the annuity", "एन्युटी में लगा"], v: ann },
+        { k: ["Monthly pension", "मासिक पेंशन"], v: pension, kind: "total" },
+        { k: ["Returns are not guaranteed. A pension of today's value will buy less in the future; see the inflation calculator.", "रिटर्न तय नहीं है। आज के हिसाब की पेंशन भविष्य में कम खरीद पाएगी; महँगाई कैलकुलेटर देखें।"], kind: "note" }],
+      split: [{ k: ["Contributed", "योगदान"], v: inv, c: c1 }, { k: ["Growth", "बढ़त"], v: bal - inv, c: c2 }],
+      table: { head: [["Age", "उम्र"], ["Contributed", "योगदान"], ["Value", "वैल्यू"]], rows: rows }
+    };
+  } };
+
+  C.ssy = { compute: function (v) {
+    var d = Math.min(150000, Math.max(0, v.amount)), r = v.rate / 100, bal = 0, dep = 0, rows = [], start = Math.round(v.start);
+    for (var y = 1; y <= 21; y++) { if (y <= 15) dep += d; bal = (bal + (y <= 15 ? d : 0)) * (1 + r); rows.push([(start + y - 1) + "", dep, bal]); }
+    return {
+      bigLabel: ["Maturity amount (tax-free)", "मैच्योरिटी रकम (टैक्स-फ़्री)"], big: bal,
+      sub: H.t(["in ", ""]) + (start + 21) + H.t([", when she is ", " में, तब उसकी उम्र "]) + (Math.round(v.age) + 21) + H.t(["", " होगी"]),
+      rows: [{ k: ["Total deposited (15 years)", "कुल जमा (15 साल)"], v: dep }, { k: ["Interest earned", "कमाया ब्याज"], v: bal - dep, kind: "add" }, { k: ["Maturity amount", "मैच्योरिटी रकम"], v: bal, kind: "total" },
+        { k: v.amount > 150000 ? ["SSY takes at most 1.5 lakh a year, so 1.5 lakh is used.", "SSY में साल में ज़्यादा से ज़्यादा 1.5 लाख जमा होते हैं, इसलिए 1.5 लाख लिया गया।"] : ["Assumes each year's deposit is made by 5 April.", "माना गया है कि हर साल की जमा 5 अप्रैल तक होती है।"], kind: "note" }],
+      split: [{ k: ["Deposits", "जमा"], v: dep, c: c1 }, { k: ["Interest", "ब्याज"], v: bal - dep, c: c2 }],
+      table: { head: [["Year", "साल"], ["Deposited", "जमा"], ["Balance", "बैलेंस"]], rows: rows }
+    };
+  } };
+
+  C.inflation = { compute: function (v) {
+    var y = Math.round(v.years), f = Math.pow(1 + v.rate / 100, y), cost = v.mode !== "value", out = cost ? v.amount * f : v.amount / f;
+    return {
+      bigLabel: cost ? ["Cost after " + y + " years", y + " साल बाद खर्च"] : ["Worth in today's money", "आज के पैसे में कीमत"], big: out,
+      sub: H.t(["Prices rise ", "दाम "]) + H.num(f, 2) + H.t([" times", " गुना बढ़ते हैं"]),
+      rows: [{ k: ["Amount today", "आज की रकम"], v: v.amount }, { k: cost ? ["Same thing will cost", "वही चीज़ इतने की होगी"] : ["Real value later", "बाद में असल कीमत"], v: out, kind: "total" },
+        { k: cost ? ["Extra money needed", "ज़्यादा पैसा चाहिए"] : ["Buying power lost", "खरीदने की ताकत में कमी"], v: Math.abs(out - v.amount), kind: cost ? "add" : "less" },
+        { k: ["Prices halve the value of money in about " + Math.round(72 / Math.max(.1, v.rate)) + " years at this rate.", "इस दर पर पैसे की कीमत लगभग " + Math.round(72 / Math.max(.1, v.rate)) + " साल में आधी हो जाती है।"], kind: "note" }]
+    };
+  } };
+
+  C.eligible = { compute: function (v) {
+    var i = v.rate / 1200, n = Math.max(1, Math.round(v.years * 12)), e = Math.max(0, v.income * v.foir / 100 - v.existing);
+    var loan = i === 0 ? e * n : e * (Math.pow(1 + i, n) - 1) / (i * Math.pow(1 + i, n)), prop = v.ltv > 0 ? loan / (v.ltv / 100) : loan;
+    var rows = [{ k: ["Income allowed for EMIs", "EMI के लिए मंज़ूर आय"], v: v.income * v.foir / 100 }, { k: ["EMIs you already pay", "चल रही EMI"], v: v.existing, kind: "less" },
+      { k: ["EMI you can take", "इतनी EMI ले सकते हैं"], v: e, kind: "head" }, { k: ["Loan you may get", "इतना लोन मिल सकता है"], v: loan, kind: "total" },
+      { k: ["Property budget", "प्रॉपर्टी बजट"], v: prop }, { k: ["Your own money (down payment)", "आपका अपना पैसा (डाउन पेमेंट)"], v: prop - loan },
+      { k: ["Total interest over the loan", "पूरे लोन में कुल ब्याज"], v: e * n - loan }];
+    if (e <= 0) rows.unshift({ k: ["Your current EMIs already use the allowed share of income.", "आपकी चल रही EMI पहले ही आय का मंज़ूर हिस्सा ले रही हैं।"], kind: "note" });
+    return { bigLabel: ["Loan you may get", "इतना लोन मिल सकता है"], big: loan, sub: H.t(["EMI ", "EMI "]) + H.inr(e) + H.t([" for ", " "]) + Math.round(v.years) + H.t([" years", " साल तक"]), rows: rows,
+      split: [{ k: ["Loan", "लोन"], v: loan, c: c1 }, { k: ["Down payment", "डाउन पेमेंट"], v: prop - loan, c: c2 }] };
+  } };
 })();

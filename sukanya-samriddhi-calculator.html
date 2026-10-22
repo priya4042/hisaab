@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sukanya Samriddhi Calculator: SSY Maturity - Hisaab</title>
+<meta name="description" content="Work out the tax-free maturity of a Sukanya Samriddhi account for your daughter, with deposits for 15 years and maturity at 21 years.">
+<link rel="canonical" href="https://priya4042.github.io/hisaab/sukanya-samriddhi-calculator.html">
+<meta property="og:title" content="Sukanya Samriddhi Calculator: SSY Maturity - Hisaab">
+<meta property="og:description" content="Work out the tax-free maturity of a Sukanya Samriddhi account for your daughter, with deposits for 15 years and maturity at 21 years.">
+<meta property="og:image" content="https://priya4042.github.io/hisaab/assets/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E4D45">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/hisaab.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Sukanya Samriddhi (SSY) calculator", "url": "https://priya4042.github.io/hisaab/sukanya-samriddhi-calculator.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What if I miss a year?", "acceptedAnswer": {"@type": "Answer", "text": "The account becomes inactive. Pay the minimum 250 for each missed year plus a 50 rupee penalty per year to restart it."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main"><span data-only="en">Skip to content</span><span data-only="hi">सामग्री पर जाएँ</span></a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="2" width="26" height="30" rx="4" fill="#0E4D45"/><path d="M10 2v30M12.5 2v30" stroke="#F07B7B" stroke-width="1.4"/><path d="M15 11h10M15 17h10M15 23h7" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".85"/><circle cx="26" cy="25" r="6" fill="#F29F05" stroke="#fff" stroke-width="1.8"/></svg>Hisaab</a>
+  <nav class="nav" id="nav" aria-label="Main"><a href="./"><span data-only="en">Calculators</span><span data-only="hi">सभी कैलकुलेटर</span></a><a href="income-tax-calculator.html"><span data-only="en">Income tax</span><span data-only="hi">इनकम टैक्स</span></a><a href="salary-calculator.html"><span data-only="en">Salary</span><span data-only="hi">सैलरी</span></a><a href="emi-calculator.html"><span data-only="en">EMI</span><span data-only="hi">EMI</span></a><a href="gst-calculator.html"><span data-only="en">GST</span><span data-only="hi">GST</span></a></nav>
+  <button class="tbtn nav-tog" id="nav-btn" aria-controls="nav" aria-expanded="false" aria-label="Menu">&#9776;</button>
+  <button class="tbtn" id="lang-btn" type="button">हिं</button>
+  <button class="tbtn" id="theme-btn" type="button" aria-label="Dark or light theme">&#9681;</button>
+</div></header>
+
+<main id="main" class="wrap">
+  <section class="intro">
+    <div class="crumbs"><a href="./">Hisaab</a> / <span data-only="en">Sukanya Samriddhi (SSY)</span><span data-only="hi">सुकन्या समृद्धि (SSY)</span></div>
+    <h1><span data-only="en">Sukanya Samriddhi calculator</span><span data-only="hi">सुकन्या समृद्धि कैलकुलेटर</span></h1>
+    <p class="lede"><span data-only="en">Deposit for 15 years, and the account matures 21 years after it is opened, tax-free.</span><span data-only="hi">15 साल जमा करें, और खाता खुलने के 21 साल बाद टैक्स-फ़्री पूरा होता है।</span></p>
+    
+  </section>
+  <div class="calc">
+    <form class="form" id="calc-form" novalidate><fieldset><legend class="sr-only" hidden><span data-only="en">Inputs</span><span data-only="hi">इनपुट</span></legend><div class="fgrid"><div class="fld"><label for="f-amount"><span data-only="en">Yearly deposit</span><span data-only="hi">सालाना जमा</span></label><div class="inp"><span class="pre">₹</span><input type="number" id="f-amount" name="amount" value="150000" inputmode="decimal" step="any" min="0" data-money></div><small><span data-only="en">250 to 1.5 lakh a year</span><span data-only="hi">साल में 250 से 1.5 लाख</span></small></div><div class="fld"><label for="f-age"><span data-only="en">Daughter&#x27;s age now</span><span data-only="hi">बेटी की अभी की उम्र</span></label><div class="inp"><input type="number" id="f-age" name="age" value="2" inputmode="decimal" step="1" min="0" max="10"></div><small><span data-only="en">The account can be opened until she turns 10</span><span data-only="hi">खाता 10 साल की उम्र तक खुल सकता है</span></small></div><div class="fld"><label for="f-start"><span data-only="en">Year the account opens</span><span data-only="hi">खाता खुलने का साल</span></label><div class="inp"><input type="number" id="f-start" name="start" value="2026" inputmode="decimal" step="1" min="2015" max="2040"></div></div><div class="fld"><label for="f-rate"><span data-only="en">Interest rate per year</span><span data-only="hi">सालाना ब्याज दर</span></label><div class="inp"><input type="number" id="f-rate" name="rate" value="8.2" inputmode="decimal" step="0.01" min="0" max="12"><span class="suf">%</span></div><small><span data-only="en">Set by the government every quarter</span><span data-only="hi">सरकार हर तिमाही तय करती है</span></small></div></div></fieldset><p class="hint"><span data-only="en">The result updates as you type.</span><span data-only="hi">टाइप करते ही नतीजा बदलता है।</span></p></form>
+    <section class="ledger" id="ledger" aria-live="polite" aria-label="Result"></section>
+  </div>
+  <details class="yt" id="yt" hidden><summary></summary><div class="tw"></div></details>
+  <section class="sec">
+    <h2><span data-only="en">How it works</span><span data-only="hi">यह कैसे काम करता है</span></h2><p><span data-only="en">Deposits, interest and maturity are all tax-free, and deposits count under 80C in the old regime. Half the balance can be taken out for higher studies after she turns 18.</span><span data-only="hi">जमा, ब्याज और मैच्योरिटी सब टैक्स-फ़्री हैं, और पुरानी व्यवस्था में जमा 80C में गिनी जाती है। 18 साल के बाद पढ़ाई के लिए आधा बैलेंस निकाला जा सकता है।</span></p><p><span data-only="en">This assumes today&#x27;s rate stays the same for 21 years.</span><span data-only="hi">यह मानकर है कि आज की दर 21 साल तक बनी रहेगी।</span></p>
+    <h2><span data-only="en">The formula</span><span data-only="hi">फ़ॉर्मूला</span></h2><p class="formula"><span data-only="en">Each year: balance = (balance + deposit) x (1 + rate). Deposits stop after 15 years; interest continues to year 21.</span><span data-only="hi">हर साल: बैलेंस = (बैलेंस + जमा) x (1 + दर)। जमा 15 साल बाद रुकती है; ब्याज 21वें साल तक मिलता है।</span></p>
+    <h2><span data-only="en">Questions</span><span data-only="hi">सवाल</span></h2><div class="faq"><details><summary><span data-only="en">What if I miss a year?</span><span data-only="hi">एक साल जमा न करें तो?</span></summary><p><span data-only="en">The account becomes inactive. Pay the minimum 250 for each missed year plus a 50 rupee penalty per year to restart it.</span><span data-only="hi">खाता बंद हो जाता है। चालू करने के लिए हर छूटे साल के 250 और 50 रुपये सालाना जुर्माना भरें।</span></p></details></div>
+    <h2><span data-only="en">Related calculators</span><span data-only="hi">जुड़े कैलकुलेटर</span></h2><div class="related"><a href="ppf-calculator.html"><span data-only="en">PPF</span><span data-only="hi">PPF</span></a><a href="fd-calculator.html"><span data-only="en">Fixed deposit (FD)</span><span data-only="hi">फ़िक्स्ड डिपॉज़िट (FD)</span></a><a href="inflation-calculator.html"><span data-only="en">Inflation</span><span data-only="hi">महँगाई</span></a></div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap">
+  <span>&copy; <span id="year">2026</span> Hisaab. <span data-only="en">A free tool by</span><span data-only="hi">एक मुफ़्त टूल,</span> <a href="https://priya4042.github.io/">Priya Tech Labs</a>. <a href="privacy.html"><span data-only="en">Privacy</span><span data-only="hi">प्राइवेसी</span></a></span>
+  <nav aria-label="All calculators"><a href="income-tax-calculator.html"><span data-only="en">Income tax: old vs new</span><span data-only="hi">इनकम टैक्स: पुरानी बनाम नई</span></a><a href="salary-calculator.html"><span data-only="en">In-hand salary from CTC</span><span data-only="hi">CTC से हाथ में सैलरी</span></a><a href="gst-calculator.html"><span data-only="en">GST</span><span data-only="hi">GST</span></a><a href="fd-calculator.html"><span data-only="en">Fixed deposit (FD)</span><span data-only="hi">फ़िक्स्ड डिपॉज़िट (FD)</span></a><a href="rd-calculator.html"><span data-only="en">Recurring deposit (RD)</span><span data-only="hi">रेकरिंग डिपॉज़िट (RD)</span></a><a href="ppf-calculator.html"><span data-only="en">PPF</span><span data-only="hi">PPF</span></a><a href="sip-calculator.html"><span data-only="en">SIP with step-up</span><span data-only="hi">स्टेप-अप के साथ SIP</span></a><a href="emi-calculator.html"><span data-only="en">Loan EMI</span><span data-only="hi">लोन EMI</span></a><a href="loan-prepayment-calculator.html"><span data-only="en">Loan prepayment</span><span data-only="hi">लोन प्रीपेमेंट</span></a><a href="hra-calculator.html"><span data-only="en">HRA exemption</span><span data-only="hi">HRA छूट</span></a><a href="age-calculator.html"><span data-only="en">Age</span><span data-only="hi">उम्र</span></a><a href="percentage-calculator.html"><span data-only="en">Percentage</span><span data-only="hi">प्रतिशत</span></a><a href="bill-split-calculator.html"><span data-only="en">Split a bill</span><span data-only="hi">बिल बाँटें</span></a><a href="gold-price-calculator.html"><span data-only="en">Gold and silver price</span><span data-only="hi">सोना और चाँदी का दाम</span></a><a href="gratuity-calculator.html"><span data-only="en">Gratuity</span><span data-only="hi">ग्रेच्युटी</span></a><a href="nps-calculator.html"><span data-only="en">NPS and retirement</span><span data-only="hi">NPS और रिटायरमेंट</span></a><a href="sukanya-samriddhi-calculator.html"><span data-only="en">Sukanya Samriddhi (SSY)</span><span data-only="hi">सुकन्या समृद्धि (SSY)</span></a><a href="inflation-calculator.html"><span data-only="en">Inflation</span><span data-only="hi">महँगाई</span></a><a href="loan-eligibility-calculator.html"><span data-only="en">Loan eligibility</span><span data-only="hi">लोन पात्रता</span></a></nav>
+  <span><span data-only="en">For planning only. Check final figures with your bank, employer or a tax professional.</span><span data-only="hi">सिर्फ़ योजना के लिए। अंतिम आँकड़े अपने बैंक, कंपनी या टैक्स सलाहकार से जाँचें।</span></span>
+  <span><span data-only="en">Hisaab is not affiliated with the Income Tax Department, GST Council or any government body. Tax rules are taken from the Finance Act and incometax.gov.in; savings rates from the Department of Economic Affairs.</span><span data-only="hi">Hisaab का आयकर विभाग, GST परिषद या किसी सरकारी संस्था से कोई संबंध नहीं है। टैक्स नियम वित्त अधिनियम और incometax.gov.in से, बचत दरें आर्थिक कार्य विभाग से ली गई हैं।</span></span>
+</div></footer>
+<script>window.HISAAB_CALC = "ssy";</script>
+<script src="assets/calcs.js"></script>
+<script src="assets/core.js"></script>
+</body>
+</html>
