@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22",
+ "updated": "2026-10-23",
  "note": "Default inputs and labels the Hisaab app uses. Change a rate here and bump 'updated'; the app picks it up on its next launch.",
  "defaults": {
   "ppf-calculator": {
@@ -17,5 +17,37 @@
    "Rate for October to December 2026",
    "अक्टूबर से दिसंबर 2026 की दर"
   ]
+ },
+ "itr": {
+  "fy": "2025-26",
+  "ay": "2026-27",
+  "dates": [
+   {
+    "en": "ITR-1 and ITR-2 (no audit)",
+    "hi": "ITR-1 और ITR-2 (ऑडिट नहीं)",
+    "date": "2026-07-31"
+   },
+   {
+    "en": "ITR-3 and ITR-4, no audit",
+    "hi": "ITR-3 और ITR-4, ऑडिट नहीं",
+    "date": "2026-08-31"
+   },
+   {
+    "en": "Audit cases (extended by CBDT Circular 7/2026)",
+    "hi": "ऑडिट वाले मामले (CBDT सर्कुलर 7/2026 से बढ़ी)",
+    "date": "2026-11-21"
+   },
+   {
+    "en": "Belated or revised return",
+    "hi": "देर से या संशोधित रिटर्न",
+    "date": "2026-12-31"
+   },
+   {
+    "en": "Updated return (ITR-U), with extra tax",
+    "hi": "अपडेटेड रिटर्न (ITR-U), अतिरिक्त टैक्स के साथ",
+    "date": "2031-03-31"
+   }
+  ],
+  "source": "incometax.gov.in; CBDT Circular 7/2026"
  }
 }

@@ -54,7 +54,7 @@ def header(cur):
 
 def footer(scripts):
     links = "".join(f'<a href="{p["slug"]}.html">{bi(*p["name"])}</a>' for p in PAGES)
-    return f'''<footer class="foot"><div class="wrap">
+    return f'''<aside class="get-app" aria-label="Android app"><div class="wrap"><img src="https://priya4042.github.io/assets/apps/hisaab.png" alt="" width="52" height="52" loading="lazy"><p><b>{bi("Get the Hisaab app", "Hisaab ऐप पाएँ")}</b><span>{bi("Works offline, with reminders and more. Free for Android.", "ऑफ़लाइन चलता है, रिमाइंडर और भी बहुत कुछ। Android के लिए मुफ़्त।")}</span></p><a class="get-btn" href="https://github.com/priya4042/priya4042.github.io/releases/download/apps/hisaab-1.0.0-arm64.apk" download>{bi("Download for Android", "Android के लिए डाउनलोड")} <small>APK, 33 MB</small></a><span class="get-more"><a href="https://github.com/priya4042/priya4042.github.io/releases/download/apps/hisaab-1.0.0-old-phones.apk" download>{bi("Older phone?", "पुराना फ़ोन?")}</a> &middot; <a href="https://priya4042.github.io/download.html#how">{bi("How to install", "इंस्टॉल कैसे करें")}</a></span></div></aside><footer class="foot"><div class="wrap">
   <span>&copy; <span id="year">2026</span> Hisaab. {bi("A free tool by", "एक मुफ़्त टूल,")} <a href="https://priya4042.github.io/">Priya Tech Labs</a>. <a href="privacy.html">{bi("Privacy", "प्राइवेसी")}</a></span>
   <nav aria-label="All calculators">{links}</nav>
   <span>{bi("For planning only. Check final figures with your bank, employer or a tax professional.", "सिर्फ़ योजना के लिए। अंतिम आँकड़े अपने बैंक, कंपनी या टैक्स सलाहकार से जाँचें।")}</span>
