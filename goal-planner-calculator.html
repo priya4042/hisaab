@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goal Planner: Monthly SIP Needed for Education, Wedding or a House - Hisaab</title>
+<meta name="description" content="Find the monthly saving you need for a goal such as a child&#x27;s education, a wedding or a house, after inflation and what you have already saved.">
+<link rel="canonical" href="https://priya4042.github.io/hisaab/goal-planner-calculator.html">
+<meta property="og:title" content="Goal Planner: Monthly SIP Needed for Education, Wedding or a House - Hisaab">
+<meta property="og:description" content="Find the monthly saving you need for a goal such as a child&#x27;s education, a wedding or a house, after inflation and what you have already saved.">
+<meta property="og:image" content="https://priya4042.github.io/hisaab/assets/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E4D45">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/hisaab.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Goal planner calculator", "url": "https://priya4042.github.io/hisaab/goal-planner-calculator.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}}, {"@type": "FAQPage", "mainEntity": []}]}</script>
+</head>
+<body>
+<a class="skip" href="#main"><span data-only="en">Skip to content</span><span data-only="hi">सामग्री पर जाएँ</span></a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="2" width="26" height="30" rx="4" fill="#0E4D45"/><path d="M10 2v30M12.5 2v30" stroke="#F07B7B" stroke-width="1.4"/><path d="M15 11h10M15 17h10M15 23h7" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".85"/><circle cx="26" cy="25" r="6" fill="#F29F05" stroke="#fff" stroke-width="1.8"/></svg>Hisaab</a>
+  <nav class="nav" id="nav" aria-label="Main"><a href="./"><span data-only="en">Calculators</span><span data-only="hi">सभी कैलकुलेटर</span></a><a href="income-tax-calculator.html"><span data-only="en">Income tax</span><span data-only="hi">इनकम टैक्स</span></a><a href="salary-calculator.html"><span data-only="en">Salary</span><span data-only="hi">सैलरी</span></a><a href="emi-calculator.html"><span data-only="en">EMI</span><span data-only="hi">EMI</span></a><a href="gst-calculator.html"><span data-only="en">GST</span><span data-only="hi">GST</span></a></nav>
+  <button class="tbtn nav-tog" id="nav-btn" aria-controls="nav" aria-expanded="false" aria-label="Menu">&#9776;</button>
+  <button class="tbtn" id="lang-btn" type="button">हिं</button>
+  <button class="tbtn" id="theme-btn" type="button" aria-label="Dark or light theme">&#9681;</button>
+</div></header>
+
+<main id="main" class="wrap">
+  <section class="intro">
+    <div class="crumbs"><a href="./">Hisaab</a> / <span data-only="en">Goal planner</span><span data-only="hi">लक्ष्य प्लानर</span></div>
+    <h1><span data-only="en">Goal planner</span><span data-only="hi">लक्ष्य प्लानर</span></h1>
+    <p class="lede"><span data-only="en">Tell it what the goal costs today. It shows the monthly saving needed to get there.</span><span data-only="hi">बताइए लक्ष्य आज कितने का है। यह दिखाएगा वहाँ पहुँचने के लिए हर महीने कितना बचाना है।</span></p>
+    
+  </section>
+  <div class="calc">
+    <form class="form" id="calc-form" novalidate><fieldset><legend class="sr-only" hidden><span data-only="en">Inputs</span><span data-only="hi">इनपुट</span></legend><div class="fgrid"><div class="fld"><label for="f-cost"><span data-only="en">Goal cost in today&#x27;s money</span><span data-only="hi">आज के हिसाब से लक्ष्य की कीमत</span></label><div class="inp"><span class="pre">₹</span><input type="number" id="f-cost" name="cost" value="2500000" inputmode="decimal" step="any" min="0" data-money></div><small data-words aria-hidden="true"></small></div><div class="fld"><label for="f-years"><span data-only="en">Years until the goal</span><span data-only="hi">लक्ष्य में कितने साल</span></label><div class="inp"><input type="number" id="f-years" name="years" value="15" inputmode="decimal" step="1" min="1" max="40"></div></div><div class="fld"><label for="f-infl"><span data-only="en">Cost rises each year</span><span data-only="hi">हर साल कीमत बढ़ती है</span></label><div class="inp"><input type="number" id="f-infl" name="infl" value="8" inputmode="decimal" step="0.01" min="0" max="20"><span class="suf">%</span></div><small><span data-only="en">Education costs often rise 8% to 10% a year</span><span data-only="hi">पढ़ाई का खर्च अक्सर 8% से 10% सालाना बढ़ता है</span></small></div><div class="fld"><label for="f-saved"><span data-only="en">Already saved for it</span><span data-only="hi">इसके लिए पहले से बचाया</span></label><div class="inp"><span class="pre">₹</span><input type="number" id="f-saved" name="saved" value="200000" inputmode="decimal" step="any" min="0" data-money></div><small data-words aria-hidden="true"></small></div><div class="fld"><label for="f-rate"><span data-only="en">Expected return per year</span><span data-only="hi">अनुमानित सालाना रिटर्न</span></label><div class="inp"><input type="number" id="f-rate" name="rate" value="11" inputmode="decimal" step="0.01" min="0" max="20"><span class="suf">%</span></div></div><div class="fld"><label for="f-step"><span data-only="en">Raise the saving each year by</span><span data-only="hi">हर साल बचत बढ़ाएँ</span></label><div class="inp"><input type="number" id="f-step" name="step" value="5" inputmode="decimal" step="0.01" min="0" max="30"><span class="suf">%</span></div></div></div></fieldset><p class="hint"><span data-only="en">The result updates as you type.</span><span data-only="hi">टाइप करते ही नतीजा बदलता है।</span></p></form>
+    <section class="ledger" id="ledger" aria-live="polite" aria-label="Result"></section>
+  </div>
+  <details class="yt" id="yt" hidden><summary></summary><div class="tw"></div></details>
+  <section class="sec">
+    
+    <h2><span data-only="en">The formula</span><span data-only="hi">फ़ॉर्मूला</span></h2><p class="formula"><span data-only="en">Future cost = cost x (1 + inflation) ^ years. The monthly saving is found so that, with the yearly raise, it grows to the future cost minus what your savings grow to.</span><span data-only="hi">भविष्य की कीमत = कीमत x (1 + महँगाई) ^ साल। मासिक बचत ऐसी निकाली जाती है कि सालाना बढ़ोतरी के साथ वह भविष्य की कीमत में से आपकी बचत की बढ़त घटाकर बची रकम बन जाए।</span></p>
+    
+    <h2><span data-only="en">Related calculators</span><span data-only="hi">जुड़े कैलकुलेटर</span></h2><div class="related"><a href="sip-calculator.html"><span data-only="en">SIP with step-up</span><span data-only="hi">स्टेप-अप के साथ SIP</span></a><a href="inflation-calculator.html"><span data-only="en">Inflation</span><span data-only="hi">महँगाई</span></a><a href="sukanya-samriddhi-calculator.html"><span data-only="en">Sukanya Samriddhi (SSY)</span><span data-only="hi">सुकन्या समृद्धि (SSY)</span></a></div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap">
+  <span>&copy; <span id="year">2026</span> Hisaab. <span data-only="en">A free tool by</span><span data-only="hi">एक मुफ़्त टूल,</span> <a href="https://priya4042.github.io/">Priya Tech Labs</a>. <a href="privacy.html"><span data-only="en">Privacy</span><span data-only="hi">प्राइवेसी</span></a></span>
+  <nav aria-label="All calculators"><a href="income-tax-calculator.html"><span data-only="en">Income tax: old vs new</span><span data-only="hi">इनकम टैक्स: पुरानी बनाम नई</span></a><a href="salary-calculator.html"><span data-only="en">In-hand salary from CTC</span><span data-only="hi">CTC से हाथ में सैलरी</span></a><a href="gst-calculator.html"><span data-only="en">GST</span><span data-only="hi">GST</span></a><a href="fd-calculator.html"><span data-only="en">Fixed deposit (FD)</span><span data-only="hi">फ़िक्स्ड डिपॉज़िट (FD)</span></a><a href="rd-calculator.html"><span data-only="en">Recurring deposit (RD)</span><span data-only="hi">रेकरिंग डिपॉज़िट (RD)</span></a><a href="ppf-calculator.html"><span data-only="en">PPF</span><span data-only="hi">PPF</span></a><a href="sip-calculator.html"><span data-only="en">SIP with step-up</span><span data-only="hi">स्टेप-अप के साथ SIP</span></a><a href="emi-calculator.html"><span data-only="en">Loan EMI</span><span data-only="hi">लोन EMI</span></a><a href="loan-prepayment-calculator.html"><span data-only="en">Loan prepayment</span><span data-only="hi">लोन प्रीपेमेंट</span></a><a href="hra-calculator.html"><span data-only="en">HRA exemption</span><span data-only="hi">HRA छूट</span></a><a href="age-calculator.html"><span data-only="en">Age</span><span data-only="hi">उम्र</span></a><a href="percentage-calculator.html"><span data-only="en">Percentage</span><span data-only="hi">प्रतिशत</span></a><a href="bill-split-calculator.html"><span data-only="en">Split a bill</span><span data-only="hi">बिल बाँटें</span></a><a href="gold-price-calculator.html"><span data-only="en">Gold and silver price</span><span data-only="hi">सोना और चाँदी का दाम</span></a><a href="gratuity-calculator.html"><span data-only="en">Gratuity</span><span data-only="hi">ग्रेच्युटी</span></a><a href="nps-calculator.html"><span data-only="en">NPS and retirement</span><span data-only="hi">NPS और रिटायरमेंट</span></a><a href="sukanya-samriddhi-calculator.html"><span data-only="en">Sukanya Samriddhi (SSY)</span><span data-only="hi">सुकन्या समृद्धि (SSY)</span></a><a href="inflation-calculator.html"><span data-only="en">Inflation</span><span data-only="hi">महँगाई</span></a><a href="loan-eligibility-calculator.html"><span data-only="en">Loan eligibility</span><span data-only="hi">लोन पात्रता</span></a><a href="tax-saving-calculator.html"><span data-only="en">Tax-saving planner</span><span data-only="hi">टैक्स बचत प्लानर</span></a><a href="capital-gains-calculator.html"><span data-only="en">Capital gains tax</span><span data-only="hi">कैपिटल गेन टैक्स</span></a><a href="epf-calculator.html"><span data-only="en">EPF (PF) balance</span><span data-only="hi">EPF (PF) बैलेंस</span></a><a href="goal-planner-calculator.html"><span data-only="en">Goal planner</span><span data-only="hi">लक्ष्य प्लानर</span></a><a href="loan-compare-calculator.html"><span data-only="en">Compare two loans</span><span data-only="hi">दो लोन की तुलना</span></a><a href="fd-compare-calculator.html"><span data-only="en">Compare two FDs</span><span data-only="hi">दो FD की तुलना</span></a><a href="car-loan-vs-cash-calculator.html"><span data-only="en">Car loan or cash</span><span data-only="hi">कार लोन या कैश</span></a></nav>
+  <span><span data-only="en">For planning only. Check final figures with your bank, employer or a tax professional.</span><span data-only="hi">सिर्फ़ योजना के लिए। अंतिम आँकड़े अपने बैंक, कंपनी या टैक्स सलाहकार से जाँचें।</span></span>
+  <span><span data-only="en">Hisaab is not affiliated with the Income Tax Department, GST Council or any government body. Tax rules are taken from the Finance Act and incometax.gov.in; savings rates from the Department of Economic Affairs.</span><span data-only="hi">Hisaab का आयकर विभाग, GST परिषद या किसी सरकारी संस्था से कोई संबंध नहीं है। टैक्स नियम वित्त अधिनियम और incometax.gov.in से, बचत दरें आर्थिक कार्य विभाग से ली गई हैं।</span></span>
+</div></footer>
+<script>window.HISAAB_CALC = "goal";</script>
+<script src="assets/calcs.js"></script>
+<script src="assets/core.js"></script>
+</body>
+</html>

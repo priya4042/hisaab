@@ -329,4 +329,100 @@
     return { bigLabel: ["Loan you may get", "इतना लोन मिल सकता है"], big: loan, sub: H.t(["EMI ", "EMI "]) + H.inr(e) + H.t([" for ", " "]) + Math.round(v.years) + H.t([" years", " साल तक"]), rows: rows,
       split: [{ k: ["Loan", "लोन"], v: loan, c: c1 }, { k: ["Down payment", "डाउन पेमेंट"], v: prop - loan, c: c2 }] };
   } };
+
+  C.taxsave = { compute: function (v) {
+    var gross = v.salary + v.other, stdO = Math.min(50000, v.salary), stdN = Math.min(75000, v.salary), lim = +v.d80lim || 25000;
+    var fixed = v.hra + Math.min(v.home, 2e5) + Math.min(v.pt, 2500);
+    var c = Math.min(v.c80, 15e4), d = Math.min(v.d80, lim), n = Math.min(v.nps, 5e4);
+    var rc = 15e4 - c, rd = lim - d, rn = 5e4 - n;
+    var now = tax(gross - stdO - fixed - c - d - n, "old", v.age), full = tax(gross - stdO - fixed - 15e4 - lim - 5e4, "old", v.age), nw = tax(gross - stdN, "new", v.age);
+    var save = now.total - full.total, best = Math.min(full.total, nw.total), newWins = nw.total <= full.total;
+    var rows = [
+      { k: ["80C room left", "80C में बची जगह"], v: rc }, { k: ["80D room left", "80D में बची जगह"], v: rd }, { k: ["80CCD(1B) NPS room left", "80CCD(1B) NPS में बची जगह"], v: rn },
+      { k: ["Total you can still invest", "कुल और निवेश कर सकते हैं"], v: rc + rd + rn, kind: "head" },
+      { k: ["Old regime tax now", "पुरानी व्यवस्था में अभी टैक्स"], v: now.total },
+      { k: ["Old regime tax if you use all the room", "सारी जगह भरने पर पुरानी व्यवस्था में टैक्स"], v: full.total },
+      { k: ["New regime tax", "नई व्यवस्था में टैक्स"], v: nw.total },
+      { k: ["Lowest tax you can reach", "सबसे कम टैक्स जो हो सकता है"], v: best, kind: "total" },
+      { k: newWins ? ["The new regime is cheaper even after using every limit, so extra tax-saving investments will not cut your tax. Invest only if the product suits you.", "सारी सीमा भरने के बाद भी नई व्यवस्था सस्ती है, इसलिए टैक्स बचत वाले नए निवेश से टैक्स कम नहीं होगा। निवेश तभी करें जब वह आपके काम का हो।"]
+        : ["With the room filled, the old regime is cheaper. Invest by 31 March and give the proofs to your employer.", "जगह भरने पर पुरानी व्यवस्था सस्ती है। 31 मार्च तक निवेश करें और सबूत कंपनी को दें।"], kind: "note" }];
+    return { bigLabel: ["Tax you can still save (old regime)", "और बच सकने वाला टैक्स (पुरानी व्यवस्था)"], big: save,
+      sub: H.t(["by investing ", "निवेश करके "]) + H.inr(rc + rd + rn) + H.t([" more before 31 March", " और, 31 मार्च से पहले"]), rows: rows };
+  } };
+
+  C.capgain = { compute: function (v) {
+    var gain = v.sell - v.buy, eq = v.asset === "equity", debt = v.asset === "debt", lt = !debt && v.months > (eq ? 12 : 24);
+    var rate = debt ? v.slab : eq ? (lt ? 12.5 : 20) : (lt ? 12.5 : v.slab), ex = eq && lt ? Math.min(Math.max(0, gain), Math.max(0, 125000 - v.used)) : 0;
+    var taxable = Math.max(0, gain - ex), t = taxable * rate / 100, cess = t * .04, total = t + cess;
+    var kind = debt ? ["Taxed at your slab", "स्लैब दर से टैक्स"] : lt ? ["Long term", "लॉन्ग टर्म"] : ["Short term", "शॉर्ट टर्म"];
+    var rows = [{ k: ["Sold for", "बिक्री"], v: v.sell }, { k: ["Bought for", "खरीद"], v: v.buy, kind: "less" }, { k: gain >= 0 ? ["Profit", "मुनाफ़ा"] : ["Loss", "नुकसान"], v: Math.abs(gain), kind: "head" },
+      { k: ["Type of gain", "गेन का प्रकार"], v: kind }];
+    if (eq && lt) rows.push({ k: ["Tax-free part (of 1.25 lakh a year)", "टैक्स-फ़्री हिस्सा (साल के 1.25 लाख में से)"], v: ex, kind: "less" });
+    rows.push({ k: ["Taxable gain", "टैक्स योग्य गेन"], v: taxable }, { k: ["Tax at " + rate + "%", rate + "% पर टैक्स"], v: t }, { k: ["Cess 4%", "सेस 4%"], v: cess, kind: "add" },
+      { k: ["Total tax", "कुल टैक्स"], v: total, kind: "total" }, { k: ["You keep", "आपके पास बचेगा"], v: v.sell - total });
+    if (gain < 0) rows.push({ k: ["A loss pays no tax. It can be set off against other capital gains and carried forward for 8 years if you file your return on time.", "नुकसान पर टैक्स नहीं लगता। समय पर रिटर्न भरने पर इसे दूसरे कैपिटल गेन से घटाया और 8 साल तक आगे ले जाया जा सकता है।"], kind: "note" });
+    return { bigLabel: ["Tax on this sale", "इस बिक्री पर टैक्स"], big: total, sub: H.t(kind) + ", " + rate + "%", rows: rows };
+  } };
+
+  function epfRun(v) {
+    var age = Math.round(v.age), years = Math.max(0, Math.round(v.retire) - age), r = v.rate / 100, bal = v.balance, basic = v.basic, you = 0, emp = 0, rows = [];
+    for (var y = 1; y <= years; y++) {
+      var base = v.base === "cap" ? Math.min(basic, 15000) : basic, mY = base * .12, eps = Math.min(Math.min(basic, 15000) * .0833, 1250), mE = Math.max(0, base * .12 - eps), sum = 0;
+      for (var m = 0; m < 12; m++) { bal += mY + mE; you += mY; emp += mE; sum += bal; }
+      bal += sum * r / 12; rows.push([(age + y) + "", you + emp, bal]); basic *= 1 + v.growth / 100;
+    }
+    return { bal: bal, you: you, emp: emp, rows: rows };
+  }
+  C.epf = { compute: function (v) {
+    var e = epfRun(v), interest = e.bal - v.balance - e.you - e.emp;
+    return { bigLabel: ["PF balance at retirement", "रिटायरमेंट पर PF बैलेंस"], big: e.bal, sub: H.t(["at age ", "उम्र "]) + Math.round(v.retire) + H.t(["", " पर"]),
+      rows: [{ k: ["Balance today", "आज का बैलेंस"], v: v.balance }, { k: ["Your contributions", "आपका योगदान"], v: e.you, kind: "add" }, { k: ["Employer's contributions to EPF", "कंपनी का EPF योगदान"], v: e.emp, kind: "add" },
+        { k: ["Interest", "ब्याज"], v: interest, kind: "add" }, { k: ["PF balance at retirement", "रिटायरमेंट पर PF बैलेंस"], v: e.bal, kind: "total" },
+        { k: ["The EPS pension is separate and not included here.", "EPS पेंशन अलग है और यहाँ शामिल नहीं है।"], kind: "note" }],
+      split: [{ k: ["Contributions", "योगदान"], v: v.balance + e.you + e.emp, c: c1 }, { k: ["Interest", "ब्याज"], v: interest, c: c2 }],
+      table: { head: [["Age", "उम्र"], ["Contributed", "योगदान"], ["Balance", "बैलेंस"]], rows: e.rows } };
+  } };
+
+  // value of a rising monthly saving after the given years
+  function sipFv(p, i, years, step) { var bal = 0; for (var y = 0; y < years; y++) { for (var m = 0; m < 12; m++) bal = (bal + p) * (1 + i); p *= 1 + step / 100; } return bal; }
+  C.goal = { compute: function (v) {
+    var y = Math.max(1, Math.round(v.years)), future = v.cost * Math.pow(1 + v.infl / 100, y), have = v.saved * Math.pow(1 + v.rate / 100, y);
+    var gap = Math.max(0, future - have), unit = sipFv(1, v.rate / 1200, y, v.step), sip = unit > 0 ? gap / unit : 0;
+    return { bigLabel: ["Save every month", "हर महीने बचाएँ"], big: sip, sub: H.t(["rising ", "हर साल "]) + H.num(v.step) + H.t(["% each year", "% बढ़ाते हुए"]),
+      rows: [{ k: ["Goal cost today", "आज लक्ष्य की कीमत"], v: v.cost }, { k: ["Cost in " + y + " years", y + " साल बाद कीमत"], v: future, kind: "head" },
+        { k: ["Your savings will grow to", "आपकी बचत इतनी बनेगी"], v: have, kind: "less" }, { k: ["Still needed", "अभी और चाहिए"], v: gap },
+        { k: ["Save every month (first year)", "हर महीने बचाएँ (पहला साल)"], v: sip, kind: "total" },
+        { k: ["Returns are not guaranteed. Review the plan every year.", "रिटर्न तय नहीं है। हर साल योजना देखें।"], kind: "note" }] };
+  } };
+
+  function emiOf(p, i, n) { return i === 0 ? p / n : p * i * Math.pow(1 + i, n) / (Math.pow(1 + i, n) - 1); }
+  C.loancmp = { compute: function (v) {
+    var n = Math.max(1, Math.round(v.years * 12)), a = emiOf(v.amount, v.rateA / 1200, n), b = emiOf(v.amount, v.rateB / 1200, n);
+    var ia = a * n - v.amount, ib = b * n - v.amount, ta = ia + v.feeA, tb = ib + v.feeB, win = ta <= tb ? 0 : 1;
+    return { bigLabel: ["You save with offer " + (win ? "B" : "A"), "ऑफ़र " + (win ? "B" : "A") + " से बचत"], big: Math.abs(ta - tb), cols: [["Offer A", "ऑफ़र A"], ["Offer B", "ऑफ़र B"]], win: win,
+      rows: [{ k: ["Monthly EMI", "मासिक EMI"], v: [a, b] }, { k: ["Total interest", "कुल ब्याज"], v: [ia, ib] }, { k: ["Fees", "फ़ीस"], v: [v.feeA, v.feeB], kind: "add" },
+        { k: ["Total cost of the loan", "लोन की कुल लागत"], v: [ta, tb], kind: "total" }] };
+  } };
+
+  var COMP = { monthly: 12, quarterly: 4, half: 2, yearly: 1 };
+  C.fdcmp = { compute: function (v) {
+    function mat(r, c) { var k = COMP[c] || 4; return v.amount * Math.pow(1 + r / 100 / k, k * v.years); }
+    function eff(r, c) { var k = COMP[c] || 4; return (Math.pow(1 + r / 100 / k, k) - 1) * 100; }
+    var a = mat(v.rateA, v.compA), b = mat(v.rateB, v.compB), win = a >= b ? 0 : 1;
+    return { bigLabel: ["Offer " + (win ? "B" : "A") + " pays more by", "ऑफ़र " + (win ? "B" : "A") + " ज़्यादा देता है"], big: Math.abs(a - b), cols: [["Offer A", "ऑफ़र A"], ["Offer B", "ऑफ़र B"]], win: win,
+      rows: [{ k: ["Maturity amount", "मैच्योरिटी रकम"], v: [a, b], kind: "total" }, { k: ["Interest earned", "कमाया ब्याज"], v: [a - v.amount, b - v.amount] },
+        { k: ["Real yearly return %", "असल सालाना रिटर्न %"], v: [eff(v.rateA, v.compA), eff(v.rateB, v.compB)], fmt: "num" }] };
+  } };
+
+  C.carloan = { compute: function (v) {
+    var n = Math.max(1, Math.round(v.years * 12)), loan = Math.max(0, v.price - v.down), i = v.rate / 1200, e = emiOf(loan, i, n), j = v.inv / 1200;
+    var loanEnd = loan * Math.pow(1 + j, n), cashEnd = 0;
+    for (var m = 0; m < n; m++) cashEnd = (cashEnd + e) * (1 + j);
+    var win = loanEnd > cashEnd ? 0 : 1;
+    return { bigLabel: [win ? "Paying cash leaves you richer by" : "The loan leaves you richer by", win ? "कैश देने से इतना ज़्यादा बचेगा" : "लोन लेने से इतना ज़्यादा बचेगा"], big: Math.abs(loanEnd - cashEnd),
+      cols: [["Loan", "लोन"], ["Cash", "कैश"]], win: win,
+      rows: [{ k: ["Paid at purchase", "खरीद पर दिया"], v: [v.down, v.price] }, { k: ["Monthly outgo", "मासिक खर्च"], v: [e, e] }, { k: ["Interest paid to the bank", "बैंक को ब्याज"], v: [e * n - loan, 0], kind: "less" },
+        { k: ["Your investments at the end", "अंत में आपका निवेश"], v: [loanEnd, cashEnd], kind: "total" },
+        { k: ["Cash wins when your savings earn less than the loan rate.", "जब बचत पर रिटर्न लोन की दर से कम हो, तो कैश बेहतर है।"], kind: "note" }] };
+  } };
 })();
