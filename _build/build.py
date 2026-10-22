@@ -58,6 +58,7 @@ def footer(scripts):
   <span>&copy; <span id="year">2026</span> Hisaab. {bi("A free tool by", "एक मुफ़्त टूल,")} <a href="https://priya4042.github.io/">Priya Tech Labs</a>. <a href="privacy.html">{bi("Privacy", "प्राइवेसी")}</a></span>
   <nav aria-label="All calculators">{links}</nav>
   <span>{bi("For planning only. Check final figures with your bank, employer or a tax professional.", "सिर्फ़ योजना के लिए। अंतिम आँकड़े अपने बैंक, कंपनी या टैक्स सलाहकार से जाँचें।")}</span>
+  <span>{bi("Hisaab is not affiliated with the Income Tax Department, GST Council or any government body. Tax rules are taken from the Finance Act and incometax.gov.in; savings rates from the Department of Economic Affairs.", "Hisaab का आयकर विभाग, GST परिषद या किसी सरकारी संस्था से कोई संबंध नहीं है। टैक्स नियम वित्त अधिनियम और incometax.gov.in से, बचत दरें आर्थिक कार्य विभाग से ली गई हैं।")}</span>
 </div></footer>
 {scripts}
 </body>
